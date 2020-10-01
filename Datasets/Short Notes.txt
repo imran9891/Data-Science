@@ -1,0 +1,147 @@
+1. While Exporting a data frame, index is False bcoz index will appear as one separate col
+ex:	car_sales.to_csv("exported-car-sales.csv",index=False)
+2. Returns range of index from Start:Stop:Step
+ex: 	car_sales.index
+3. Returns all values in a dataframe
+ex:	car_sales.values
+4. Returns mean of all numeric columns in a dataframe
+ex:	car_sales.mean() #sum()
+5. To compare two columns of a dataframe which gives count
+ex:	pd.crosstab(car_sales["Make"],car_sales["Doors"]) 
+6. Groupby: By grouping dataframe along a single column returns mean,sum,count of numeric cols 
+ex:	car_sales.groupby(["Make"]).mean() #count() #sum()
+7. Since dtype of Price col is an object data-type, it can't be plotted so converting it into int using replace & astype
+ex:	car_sales["Price"]=car_sales["Price"].replace('[\$\,\.]','',regex=True).astype(int)
+8. Returns all values in lowercase of selected column.
+ex:	car_sales["Make"].str.lower()
+9. Shuffling of index for irregular indexes by sample(), frac=1 means 100% shuffling
+ex:	car_sales_shuffled=car_sales.sample(frac=1)
+10. Resetting index as per original ones by dropping index values
+ex:	car_sales_shuffled.reset_index(drop=True,inplace=True) 
+11. Using apply(f) or map(f)
+ex:	car_sales["Odometer (Miles)"]=car_sales["Odometer (KM)"].apply(lambda x:x/1.6)
+ex:	car_sales["Odometer (Miles)"]=car_sales["Odometer (KM)"].map(lambda x:x/1.6)
+12. Generating random numbers
+ex:	np.random.randint(0,10,size=(3,5)) # No.between 0 to 9 in shape of 3*5
+ex:	np.random.random((5,3)) # No. between 0 & 1 
+ex:	np.random.randn((5,3)) # No. between 0 & 1
+13. Returns unique values
+ex:	np.unique(colname)
+14. Performs squaring
+ex:	np.square() or colname**2
+15. Magic Function %timeit returns time taken
+ex:	%timeit np.sum(massive_array)
+16. Dot product of 2 matrix
+ex:	np.dot(mat1,mat2)
+17. Sorting the numpy array
+ex:	np.sort(random_array) # sort the array row-wise means by default axis=-1
+18. Argsort: sorting the array based on index numbers (index-wise sorting)
+ex:	np.argsort(random_array)
+19. Argmin: Returns the minimum-value index
+ex:	np.argmin(random_array) # axis can be 0(row-wise) or 1(col-wise)
+20. Argmax: Returns the maximum-value index
+ex:	np.argmax(random_array) # axis can be 0(row-wise) or 1(col-wise)
+21. How to paste pic in jupyter notebook in markdown?
+ex:	<img src="Directory/imagepath.ext"/>
+22. Convert image into Numpy Array by using matplotlib library
+ex:	from matplotlib.image import imread
+23. How to find the absolute path of any file?
+ex:	import os
+ex:	print(os.path.abspath("filename.ext"))
+24. Magic command to import all methods of matplotlib in the current notebook
+ex:	%matplotlib inline
+25. Plot a blank canvas
+ex: plt.plot();
+26. Create a blank and add subplots
+ex:	fig = plt.figure()
+ex:	ax = fig.add_subplot(nrows,ncols)
+ex:	ax.plot():
+27. Create a blank canvas of square shape
+ex:	fig = plt.figure()
+ex:	ax = fig.add_axes([1,1,1,1])
+ex: 	ax.plot()
+28. Create a blank canvas of 1 row and 1 col
+ex:	fig,ax = plt.subplots() # by default nrows=1 and ncols=1
+ex:	ax.plot(x,y)
+29. Create a figure of 1 subplot of figsize (10,10) #square canvas
+ex:	fig,ax=plt.subplots(figsize=(10,10)) # (width,height)
+30. Customize plot using set command
+ex:	ax.set(title="Simple plot", xlabel="x-axis", ylabel="y-axis")
+31. How to save a figure?
+ex: 	fig.savefig("images/sample-plot.png"); # (filename with extention)
+32. Plot different graphs
+ex:	ax.plot(x,y), ax.scatter(x,y), ax.bar(x,y), ax.hist()
+33. Making horizontal bar plot
+ex:	fig,ax=plt.subplots()
+ex:	ax.barh(list(nut_butter_prices.keys()),list(nut_butter_prices.values())); # Giving the values in a list to create barh plot
+34. Creating 4 subplots of given figsize using plt.subplots()
+ex:	plt.subplots(nrows=2,ncols=2,figsize=(10,5)) # gives 4 subplots
+35. Create 4 subplots # First way
+ex:	fig,((ax1,ax2),(ax3,ax4))= plt.subplots(nrows=2,ncols=2,figsize=(10,5))
+ex:	ax1.plot(x,x/2);
+ex:	ax2.scatter(np.random.random(10),np.random.random(10));
+ex:	ax3.bar(nut_butter_prices.keys(),nut_butter_prices.values());
+ex:	ax4.hist(np.random.randn(1000));
+36. Create 4 subplots # Second way
+ex:	fig,ax=plt.subplots(nrows=2,ncols=2,figsize=(10,5))
+ex:	ax[0,0].plot(x,x/2);
+ex:	ax[0,1].scatter(np.random.random(10),np.random.random(10));
+ex:	ax[1,0].bar(nut_butter_prices.keys(),nut_butter_prices.values());
+ex:	ax[1,1].hist(np.random.randn(1000));
+37. Create a series having 1000 values randomly generated with index as date from 1 Jan 2020
+ex:	ts=pd.Series(np.random.randn(1000), # Randomly generates 1000 numbers
+             index=pd.date_range("1/1/2020", periods=1000)) # Return a fixed frequency DatetimeIndex, #Number of periods to generate
+38. Returns cumulative sum
+ex:	ts=ts.cumsum()
+ex:	ts.plot(); # plot the ts
+39. Converting object dtype to integer dtype
+ex:	car_sales["Price"]=car_sales["Price"].str.replace('[\$\,\.]','') # removes only given signs in brackets
+ex:	car_sales["Price"]=car_sales["Price"].str[:-2] # Remove last 2 zeros by slicing shows all except last 2 since type is 'str' till now
+40. Create 10 entries with date range starting from 1 Jan 2020 using pandas
+ex:	pd.date_range("1/1/2020",periods=10)
+41. Creating a new column with cumulative values of Price
+ex: 	car_sales["Total Sales"]= car_sales["Price"].astype(int).cumsum() #astype(int):converted to int cumsum(): returns cumulative sum
+42. Create a histograms of all columns of heart-disease dataset
+ex:	heart_disease.plot.hist(figsize=(20,30),subplots=True); # subplots=True means for all columns
+43. When plotting something quickly, okay to use the pyplot method & When plotting something more advanced use OO Method.
+44. Pyplot Method of plotting
+ex:	over_50.plot(kind="scatter", x="age", y="chol", c="target"); # c-colour
+45. OO method mixed with pyplot method
+ex:	fig,ax=plt.subplots(figsize=(10,6))
+	over_50.plot(kind="scatter", x="age", y="chol", c="target", ax=ax);
+	ax.set_xlim([45,100]); # Set limit of x in the given range
+46. OO method from scratch
+ex:	fig,ax=plt.subplots(figsize=(10,6)) # sharex = True means X-axis is being shared by different subplots.
+	ax.legend(*scatter.legend_elements(),title="Target"); # Add legends with the title "Target"
+	ax.axhline(over_50["chol"].mean(), linestyle="--"); # Add horizontal line at the mean point of over50["chol"], # linestyle can be different
+47. How to add a title to the figure?
+ex:	fig.suptitle("Heart Disease Analysis", fontsize=16, fontweight="bold");
+48. How to see the different styles available in matplotlib?
+ex:	plt.style.available
+49. How to change the style in matplotlib?
+ex:	plt.style.use("seaborn-whitegrid")
+50. How to make the legend visible?
+ex:	ax.legend().set_visible(True)
+51. How the change the limits of X & Y axis?
+ex:	ax.set_xlim([])
+ex:	ax.set_ylim([])
+52. The plots so made are saved by default in the variable named as "fig" since we are creating fig,ax = plt.subplots()
+53. With using simple pyplot we can't use set() as numpy.ndarray has no such attribute.
+54. Numpy functions:
+	* np.zeros(), * np.ones(), * np.arange(), * np.array([]), * np.concatenate(), * np.linspace(,,), * np.reshape(), * np.resize(), * np.hstack(), * np.vstack(),
+	* np.hsplit(), * np.vsplit(), * np.sort(), * np.insert(), * np.delete(), * np.savetxt(), * np.loadtxt(), * np.save() # saved with extention .npy, * np.load(),
+	* np.amin(), * np.amax(), * np.ptp(), * np.mean(), * np.sum(), * np.median(), *np.std(), *np.var(), * np.nunique(), * np.unique()
+55. How to sort column names?
+ex:	e1.sort_index(axis=1, ascending=True) # using the sort_index()
+56. How to insert column into DataFrame at specified location?
+ex:	e1.insert(1,'location',['x','y','z']) # e1.insert(loc, column, value)
+57. How to sort particular column?
+ex:	e1.Age.sort_values() # output in series format by using sort_values()
+58. Show those movies which start with `once`?
+ex:	movies[movies.title.str.startswith('Once')]
+59. How to show only particular type of columns like int type, string type?
+ex:	movies.select_dtypes(include=['object'])
+60. How to show only those records which have genres like Drama, Crime, Action?
+ex:	movies[movies.genre.isin(['Drama','Crime','Action'])]
+61. How to display all rows from dataframe using pandas?
+ex:	pd.set_option('display.max_rows',None)
